@@ -1,11 +1,11 @@
 extern crate pkg_config;
-extern crate gcc;
+extern crate cc;
 
-use std::path::PathBuf;
+use std::path::Path;
 
 fn main() {
-    let root = PathBuf::from(&std::env::var("CARGO_MANIFEST_DIR").unwrap())
-        .join("libogg");
+    let root = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+    let root = Path::new(&root).join("libogg");
 
     println!("cargo:include={}", root.join("include").display());
 
@@ -14,7 +14,7 @@ fn main() {
         Err(..) => {}
     };
 
-    gcc::Config::new()
+    cc::Build::new()
                 .file("libogg/src/bitwise.c")
                 .file("libogg/src/framing.c")
                 .define("_USRDLL", None)

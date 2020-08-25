@@ -3,7 +3,7 @@
 
 extern crate libc;
 
-pub type ogg_int64_t = libc::int64_t;
+pub type ogg_int64_t = i64;
 
 #[repr(C)]
 pub struct ogg_iovec_t {
